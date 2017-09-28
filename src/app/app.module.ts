@@ -10,7 +10,9 @@ import {
   MdIconModule,
   MdIconRegistry,
   MdSidenavModule,
-  MdListModule
+  MdListModule,
+  MdTableModule,
+  MdSortModule
 } from '@angular/material';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './homepage/homepage';
@@ -28,7 +30,7 @@ const appRoutes: Routes = [
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      // { enableTracing: true } // <-- debugging purposes only
     ),
     BrowserModule,
     BrowserAnimationsModule,
@@ -38,7 +40,9 @@ const appRoutes: Routes = [
     MdNativeDateModule,
     MdIconModule,
     MdSidenavModule,
-    MdListModule
+    MdListModule,
+    MdTableModule,
+    MdSortModule
   ],
   providers: [MdIconRegistry],
   bootstrap: [AppComponent]

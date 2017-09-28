@@ -1,1 +1,22 @@
-leaderboard
+<div class="leaderboard example-container mat-elevation-z8">
+  <md-table class="leaderboard__table" #table [dataSource]="dataSource" mdSort>
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Name Column -->
+    <ng-container mdColumnDef="name">
+      <md-header-cell class="leaderboard__table-cell" *mdHeaderCellDef md-sort-header> Name </md-header-cell>
+      <md-cell *mdCellDef="let row"> {{row.name}} </md-cell>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container mdColumnDef="points">
+      <md-header-cell class="leaderboard__table-cell" *mdHeaderCellDef md-sort-header> Points </md-header-cell>
+      <md-cell *mdCellDef="let row"> {{row.points}} </md-cell>
+    </ng-container>
+
+    <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+    <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+  </md-table>
+</div>

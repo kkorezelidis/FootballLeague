@@ -1,0 +1,14 @@
+.leaderboard {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+
+  .leaderboard__table {
+    overflow: auto;
+    max-height: 500px;
+  }
+
+  .leaderboard__table-cell {
+    color: black;
+  }
+}
