@@ -4,27 +4,35 @@
       <a routerLink="/homepage" routerLinkActive="active">
         <md-list-item class="app-container__sidenav-list__item">
           <md-icon>home</md-icon>
-          <div>Κεντρικη Σελιδα</div>
+          <div>{{ 'HomePage.title' | translate }}</div>
         </md-list-item>
       </a>
       <a routerLink="/leaderboard" routerLinkActive="active">
         <md-list-item class="app-container__sidenav-list__item">
           <md-icon>format_list_numbered</md-icon>
-          <div>Βαθμολογία</div>
+          <div>{{ 'LeaderBoard.title' | translate }}</div>
         </md-list-item>
       </a>
       <md-list-item class="app-container__sidenav-list__item">
         <md-icon>group</md-icon>
-        <div>Πρωτάθλημα</div>
+        <div>{{ 'League.title' | translate }}</div>
       </md-list-item>
     </md-list>
   </md-sidenav>
 
   <div class="header">
-    <md-icon (click)="sidenav.open()">menu</md-icon>
-    <span class="header__title">
-    FootBall League
-  </span>
+    <div class="header__left">
+      <div>
+        <md-icon (click)="sidenav.open()">menu</md-icon>
+      </div>
+      <div class="header__title">
+      FootBall League
+    </div>
+    </div>
+    <div class="header__right">
+
+      <span class="header__right-flag flag-icon" [ngClass]="flag" (click)="toggleLanguage()"> </span>
+    </div>
   </div>
 
   <router-outlet></router-outlet>

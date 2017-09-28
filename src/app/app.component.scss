@@ -4,7 +4,25 @@
   align-items: center;
   background-color: #403c44;
   height: 45px;
-  padding: 10px;
+  padding: 10px 20px;
+
+  header__right-flag {
+    cursor: pointer;
+  }
+
+  .header__left,
+  .header__right {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  .header__left {
+    flex-direction: row;
+  }
+
+  .header__right {
+    flex-direction: row-reverse;
+  }
 
   md-icon {
     color: white;
@@ -14,6 +32,9 @@
   .header__title {
     color: white;
     padding-left: 10px;
+    align-self: center;
+    font-size: 18px;
+    line-height: 19px;
   }
 }
 
