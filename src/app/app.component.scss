@@ -40,6 +40,12 @@
 
       .app-container__sidenav-list__item{
         cursor: pointer;
+        font-size: 14px;
+        text-transform: uppercase;
+
+        md-icon {
+          margin-right: 10px;
+        }
       }
     }
 
