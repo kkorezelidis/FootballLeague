@@ -6,6 +6,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
+import { LoaderService } from './common/loader/loader.service';
+import { LoaderComponent } from './common/loader/loader.component';
 import { FormsModule } from '@angular/forms';
 import {
   MdButtonModule,
@@ -20,7 +22,9 @@ import {
   MdSortModule,
   MdInputModule,
   MatTabsModule,
-  MatSelectModule
+  MatSelectModule,
+  MatProgressSpinnerModule,
+  MatProgressBarModule
 } from '@angular/material';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './homepage/homepage';
@@ -39,7 +43,7 @@ export function createTranslateLoader(http: HttpClient) {
 
 
 @NgModule({
-  declarations: [AppComponent, LeagueComponent, HomePageComponent],
+  declarations: [AppComponent, LeagueComponent, HomePageComponent, LoaderComponent],
   imports: [
     RouterModule.forRoot(
       appRoutes,
@@ -68,9 +72,14 @@ export function createTranslateLoader(http: HttpClient) {
     MatTabsModule,
     MatSelectModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule
   ],
-  providers: [MdIconRegistry],
+  exports: [
+    LoaderComponent
+  ],
+  providers: [MdIconRegistry, LoaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
