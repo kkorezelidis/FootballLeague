@@ -5,6 +5,8 @@ import {HttpClientModule, HttpClient} from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 import {
   MdButtonModule,
   MdCheckboxModule,
@@ -15,17 +17,20 @@ import {
   MdSidenavModule,
   MdListModule,
   MdTableModule,
-  MdSortModule
+  MdSortModule,
+  MdInputModule,
+  MatTabsModule,
+  MatSelectModule
 } from '@angular/material';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './homepage/homepage';
-import { LeaderBoardComponent } from './leaderboard/leaderboard';
+import { LeagueComponent } from './league/league';
 import 'hammerjs';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
   { path: 'homepage', component: HomePageComponent },
-  { path: 'leaderboard', component: LeaderBoardComponent }
+  { path: 'league', component: LeagueComponent }
 ];
 
 export function createTranslateLoader(http: HttpClient) {
@@ -34,7 +39,7 @@ export function createTranslateLoader(http: HttpClient) {
 
 
 @NgModule({
-  declarations: [AppComponent, LeaderBoardComponent, HomePageComponent],
+  declarations: [AppComponent, LeagueComponent, HomePageComponent],
   imports: [
     RouterModule.forRoot(
       appRoutes,
@@ -58,7 +63,12 @@ export function createTranslateLoader(http: HttpClient) {
     MdSidenavModule,
     MdListModule,
     MdTableModule,
-    MdSortModule
+    MdSortModule,
+    MdInputModule,
+    MatTabsModule,
+    MatSelectModule,
+    FormsModule,
+    HttpModule
   ],
   providers: [MdIconRegistry],
   bootstrap: [AppComponent]

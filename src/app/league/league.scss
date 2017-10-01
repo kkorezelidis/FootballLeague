@@ -1,0 +1,17 @@
+.league {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+
+  .league__selectLeague{
+    margin: 20px;
+  }
+
+  .league__table {
+    overflow: scroll;
+  }
+
+  .league__table-cell {
+    color: black;
+  }
+}
