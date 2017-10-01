@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
 import { AppSettings } from '../appSettings';
 import { League } from './types/league.dt';
-import {
-  Http,
-  Headers,
-  RequestOptions,
-} from '@angular/http';
-import 'rxjs/add/operator/toPromise';
+import { LoaderService } from '../common/loader/loader.service';
+
 
 @Injectable()
 export class LeaguedService {
   headers: Headers;
   options: RequestOptions;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private loaderService: LoaderService) {
     this.headers = new Headers({
       'Content-Type': 'application/json',
       'Accept': 'q=0.8;application/json;q=0.9'
@@ -21,14 +23,23 @@ export class LeaguedService {
     this.options = new RequestOptions({ headers: this.headers });
   }
 
-  getLeagues(): Promise<Array<League>> {
+  getLeagues(): Observable<Array<League>> {
+    this.showLoader();
+
     return this.http
       .get(AppSettings.API_ENDPOINTS.baseUrl + AppSettings.API_ENDPOINTS.leagues, this.options)
-      .toPromise()
-      .then(response => response.json().data)
-      .catch(() => {
-        return false;
-        // TODO popup on error case
+      .map((res: Response) => res.json().data)
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
+      .finally(() => {
+        this.hideLoader();
       });
+  }
+
+  private showLoader(): void {
+    this.loaderService.show();
+  }
+
+  private hideLoader(): void {
+    this.loaderService.hide();
   }
 }

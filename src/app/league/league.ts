@@ -3,9 +3,6 @@ import { DataSource } from '@angular/cdk/collections';
 import { MdSort } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { LeaguedService } from './league.service';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/observable/merge';
-import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-league',
@@ -15,7 +12,6 @@ import 'rxjs/add/operator/map';
 })
 export class LeagueComponent implements OnInit {
   constructor(private leagueService: LeaguedService) {}
-
 
   displayedColumns = ['name', 'points'];
   dataSource: ExampleDataSource | null;
@@ -35,12 +31,12 @@ export class LeagueComponent implements OnInit {
     { name: 'ΛΑΜΙΑ', points: 43 },
     { name: 'ΞΑΝΘΗ', points: 55 },
     { name: 'ΑΤΡΟΜΗΤΟΣ', points: 54 }
-  ]
+  ];
 
   @ViewChild(MdSort) sort: MdSort;
 
   ngOnInit() {
-    this.leagueService.getLeagues().then((leagues) => {
+    this.leagueService.getLeagues().subscribe(leagues => {
       this.leagues = leagues;
       this.selectedLeague = leagues[0].id;
     });
