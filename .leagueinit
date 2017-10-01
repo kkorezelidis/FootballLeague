@@ -1,0 +1,12 @@
+ctp_path_prepend() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="$1${PATH:+":$PATH"}"
+    fi
+}
+
+ctp_path_prepend ./node_modules/.bin
+export NODE_ENV=test
+
+unset -f ctp_path_prepend
+
+nvm use 6.9.5
