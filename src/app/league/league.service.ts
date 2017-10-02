@@ -8,6 +8,7 @@ import 'rxjs/add/operator/catch';
 import { AppSettings } from '../appSettings';
 import { League } from './types/league.dt';
 import { LoaderService } from '../common/loader/loader.service';
+import { DialogService } from '../common/dialog/dialog.service';
 
 
 @Injectable()
@@ -15,7 +16,7 @@ export class LeaguedService {
   headers: Headers;
   options: RequestOptions;
 
-  constructor(private http: Http, private loaderService: LoaderService) {
+  constructor(private http: Http, private loaderService: LoaderService, private dialogService: DialogService) {
     this.headers = new Headers({
       'Content-Type': 'application/json',
       'Accept': 'q=0.8;application/json;q=0.9'
@@ -29,7 +30,7 @@ export class LeaguedService {
     return this.http
       .get(AppSettings.API_ENDPOINTS.baseUrl + AppSettings.API_ENDPOINTS.leagues, this.options)
       .map((res: Response) => res.json().data)
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
+      .catch((error: any) => {console.warn('err', error); return Observable.throw(error); })
       .finally(() => {
         this.hideLoader();
       });

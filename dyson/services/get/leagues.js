@@ -12,7 +12,12 @@ var leagues = {
         {id: 6, name: 'Saturday'},
         {id: 7, name: 'Sunday'}
       ]
-    }
+  }
+  // status: function(req, res) {
+  //     res.status(200)
+    // res.status(500).end('Feature not found');;
+    // next();
+  // }
 };
 
 module.exports = [leagues];
