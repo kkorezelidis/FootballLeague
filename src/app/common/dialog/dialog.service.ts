@@ -7,7 +7,7 @@ export class DialogService {
 
   constructor(private dialog: MdDialog) { }
 
-  openDialog(title, content, buttonAccept, buttonReject, acceptFunc?, rejectFunc?) {
+  openDialog(title, content, buttonAccept, buttonReject, acceptFunc?, rejectFunc = () => {}) {
     this.dialog.open(DialogComponent, {
       // height: '350px',
       data: {
@@ -15,7 +15,8 @@ export class DialogService {
         content,
         buttonAccept,
         buttonReject,
-        acceptFunc
+        acceptFunc,
+        rejectFunc
       }
     });
   }

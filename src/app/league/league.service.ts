@@ -9,6 +9,8 @@ import { AppSettings } from '../appSettings';
 import { League } from './types/league.dt';
 import { LoaderService } from '../common/loader/loader.service';
 import { DialogService } from '../common/dialog/dialog.service';
+import { environment } from '../../environments/environment';
+
 
 
 @Injectable()
@@ -28,9 +30,14 @@ export class LeaguedService {
     this.showLoader();
 
     return this.http
-      .get(AppSettings.API_ENDPOINTS.baseUrl + AppSettings.API_ENDPOINTS.leagues, this.options)
+      .get(environment.baseUrl + AppSettings.API_ENDPOINTS.leagues, this.options)
       .map((res: Response) => res.json().data)
-      .catch((error: any) => {console.warn('err', error); return Observable.throw(error); })
+      .catch((error: any) => {
+        // this.dialogService.openDialog('Title', 'message', 'button1', 'button2', () => {
+        //   console.log('test');
+        // });
+        return Observable.throw(error);
+      })
       .finally(() => {
         this.hideLoader();
       });
