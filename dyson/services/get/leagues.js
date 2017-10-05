@@ -4,18 +4,15 @@ var leagues = {
     path: '/leagues',
     container: {
       data: [
-        {id: 1, name: 'Monday'},
-        {id: 2, name: 'Tuesday'},
-        {id: 3, name: 'Wednesday'},
-        {id: 4, name: 'Thursday'},
-        {id: 5, name: 'Friday'},
-        {id: 6, name: 'Saturday'},
-        {id: 7, name: 'Sunday'}
+        {id: 1, name: 'Δευτέρα'},
+        {id: 2, name: 'Τρίτη'},
+        {id: 3, name: 'Τετάρτη'},
+        {id: 4, name: 'Αστυνομικοί'}
       ]
   }
   // status: function(req, res) {
   //     res.status(200)
-    // res.status(500).end('Feature not found');;
+    // res.status(500).end('Feature not found');
     // next();
   // }
 };

@@ -2,7 +2,7 @@ var dyson = require('../node_modules/dyson/lib/dyson');
 
 dyson.bootstrap({
   configDir: __dirname + '/services',
-  port: 3000
+  port: 4000
 });
 
 // Provided dyson is installed globally,
