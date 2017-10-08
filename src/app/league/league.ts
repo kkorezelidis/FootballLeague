@@ -13,25 +13,10 @@ import { LeaguedService } from './league.service';
 export class LeagueComponent implements OnInit {
   constructor(private leagueService: LeaguedService) {}
 
-  displayedColumns = ['name', 'points'];
+  displayedColumns = ['teamName', 'points'];
   dataSource: ExampleDataSource | null;
   leagues: Array<any>;
   selectedLeague: number;
-
-  data = [
-    { name: 'ΟΛΥΜΠΙΑΚΟΣ', points: 1 },
-    { name: 'ΠΑΝΑΘΗΝΑΙΚΟΣ', points: 2 },
-    { name: 'ΑΕΚ', points: 3 },
-    { name: 'ΠΑΟΚ', points: 5 },
-    { name: 'ΗΡΑΚΛΗΣ', points: 10 },
-    { name: 'ΠΑΝΙΩΝΙΟΣ', points: 15 },
-    { name: 'ΑΡΗΣ', points: 20 },
-    { name: 'ΛΑΡΙΣΣΑ', points: 22 },
-    { name: 'ΠΛΑΤΑΝΙΑΣ', points: 21 },
-    { name: 'ΛΑΜΙΑ', points: 43 },
-    { name: 'ΞΑΝΘΗ', points: 55 },
-    { name: 'ΑΤΡΟΜΗΤΟΣ', points: 54 }
-  ];
 
   @ViewChild(MdSort) sort: MdSort;
 
@@ -39,14 +24,22 @@ export class LeagueComponent implements OnInit {
     this.leagueService.getLeagues().subscribe(leagues => {
       this.leagues = leagues;
       this.selectedLeague = leagues[0].id;
+      this.getRanking();
+    }, (error) => {
+      console.log('er', error);
     });
     this.sort.active = 'points';
     this.sort.direction = 'desc';
-    this.dataSource = new ExampleDataSource(this.data, this.sort);
   }
 
-  onChange(value) {
-    this.dataSource = new ExampleDataSource(this.data, this.sort);
+  onChange() {
+    this.getRanking();
+  }
+
+  private getRanking() {
+    this.leagueService.getRankings(this.selectedLeague).subscribe(ranking => {
+      this.dataSource = new ExampleDataSource(ranking, this.sort);
+    });
   }
 }
 
@@ -76,8 +69,8 @@ export class ExampleDataSource extends DataSource<any> {
       let propertyA: number | string = '';
       let propertyB: number | string = '';
       switch (this._sort.active) {
-        case 'name':
-          [propertyA, propertyB] = [a.name, b.name];
+        case 'teamName':
+          [propertyA, propertyB] = [a.teamName, b.teamName];
           break;
         case 'points':
           [propertyA, propertyB] = [a.points, b.points];

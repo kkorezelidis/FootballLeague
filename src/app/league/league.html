@@ -1,5 +1,5 @@
 <div class="league example-container mat-elevation-z8">
-  <md-select class="league__selectLeague" placeholder="Επιλογή πρωταθλήματος" [(ngModel)]="selectedLeague" (change)="onChange(selectedLeague)">
+  <md-select class="league__selectLeague" placeholder="Επιλογή πρωταθλήματος" [(ngModel)]="selectedLeague" (change)="onChange()">
     <md-option *ngFor="let league of leagues" [value]="league.id">
       {{ league.name }}
     </md-option>
@@ -12,9 +12,9 @@
 			  The actual rendered columns are set as a property on the row definition" -->
 
         <!-- Name Column -->
-        <ng-container mdColumnDef="name">
-          <md-header-cell class="league__table-cell" *mdHeaderCellDef md-sort-header> Name </md-header-cell>
-          <md-cell *mdCellDef="let row"> {{row.name}} </md-cell>
+        <ng-container mdColumnDef="teamName">
+          <md-header-cell class="league__table-cell" *mdHeaderCellDef md-sort-header> Ομάδα </md-header-cell>
+          <md-cell *mdCellDef="let row"> {{row.teamName}} </md-cell>
         </ng-container>
 
         <!-- Progress Column -->

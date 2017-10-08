@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { AppSettings } from '../appSettings';
-import { League } from './types/league.dt';
+import { League, Ranking } from './types/league.dt';
 import { LoaderService } from '../common/loader/loader.service';
 import { DialogService } from '../common/dialog/dialog.service';
 import { environment } from '../../environments/environment';
@@ -21,22 +21,39 @@ export class LeaguedService {
   constructor(private http: Http, private loaderService: LoaderService, private dialogService: DialogService) {
     this.headers = new Headers({
       'Content-Type': 'application/json',
-      'Accept': 'q=0.8;application/json;q=0.9'
+      'Accept': 'application/json;charset=UTF-8'
     });
     this.options = new RequestOptions({ headers: this.headers });
   }
 
-  getLeagues(): Observable<Array<League>> {
+  getLeagues(): Observable<League[]> {
     this.showLoader();
 
     return this.http
       .get(environment.baseUrl + AppSettings.API_ENDPOINTS.leagues, this.options)
-      .map((res: Response) => res.json().data)
+      .map((res: Response) => res.json())
       .catch((error: any) => {
         // this.dialogService.openDialog('Title', 'message', 'button1', 'button2', () => {
         //   console.log('test');
         // });
-        return Observable.throw(error);
+        return Observable.throw(error.json().error || 'Server error');
+      })
+      .finally(() => {
+        this.hideLoader();
+      });
+  }
+
+  getRankings(leagueId): Observable<Ranking[]> {
+    this.showLoader();
+
+    return this.http
+      .get(environment.baseUrl + AppSettings.API_ENDPOINTS.rankings + leagueId, this.options)
+      .map((res: Response) => res.json())
+      .catch((error: any) => {
+        // this.dialogService.openDialog('Title', 'message', 'button1', 'button2', () => {
+        //   console.log('test');
+        // });
+        return Observable.throw(error.json().error || 'Server error');
       })
       .finally(() => {
         this.hideLoader();
