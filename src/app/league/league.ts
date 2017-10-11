@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
-import { MdSort } from '@angular/material';
+import { MatSort } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { LeaguedService } from './league.service';
 
@@ -17,10 +17,12 @@ export class LeagueComponent implements OnInit {
   dataSource: ExampleDataSource | null;
   leagues: Array<any>;
   selectedLeague: number;
+  matches: any;
 
-  @ViewChild(MdSort) sort: MdSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
+    this.matches = ['ολυ', 'παν', 'αεκ', 'paok'];
     this.leagueService.getLeagues().subscribe(leagues => {
       this.leagues = leagues;
       this.selectedLeague = leagues[0].id;
@@ -44,7 +46,7 @@ export class LeagueComponent implements OnInit {
 }
 
 export class ExampleDataSource extends DataSource<any> {
-  constructor(private _data: Array<any>, private _sort: MdSort) {
+  constructor(private _data: Array<any>, private _sort: MatSort) {
     super();
   }
 

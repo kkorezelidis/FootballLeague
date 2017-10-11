@@ -1,8 +1,8 @@
-<h1 md-dialog-title>{{ data.title }}</h1>
-<div md-dialog-content>
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>
   {{ data.content }}
 </div>
-<md-dialog-actions>
-  <button md-button [md-dialog-close]="true" tabindex="1" (click)="data.acceptFunc()">{{ data.buttonAccept }}</button>
-  <button md-button md-dialog-close tabindex="-1">{{ data.buttonReject }}</button>
-</md-dialog-actions>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true" tabindex="1" (click)="data.acceptFunc()">{{ data.buttonAccept }}</button>
+  <button mat-button mat-dialog-close tabindex="-1">{{ data.buttonReject }}</button>
+</mat-dialog-actions>

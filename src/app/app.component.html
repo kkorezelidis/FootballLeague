@@ -1,30 +1,30 @@
 <app-loader></app-loader>
-<md-sidenav-container class="app-container">
-  <md-sidenav mode="push" #sidenav class="app-container__sidenav">
-    <md-list class="app-container__sidenav-list">
+<mat-sidenav-container class="app-container">
+  <mat-sidenav mode="push" #sidenav class="app-container__sidenav">
+    <mat-list class="app-container__sidenav-list">
       <a routerLink="/homepage" routerLinkActive="active">
-        <md-list-item class="app-container__sidenav-list__item">
-          <md-icon>home</md-icon>
+        <mat-list-item class="app-container__sidenav-list__item">
+          <mat-icon>home</mat-icon>
           <div>{{ 'HomePage.title' | translate }}</div>
-        </md-list-item>
+        </mat-list-item>
       </a>
       <a routerLink="/league" routerLinkActive="active">
-        <md-list-item class="app-container__sidenav-list__item">
-          <md-icon>format_list_numbered</md-icon>
+        <mat-list-item class="app-container__sidenav-list__item">
+          <mat-icon>format_list_numbered</mat-icon>
           <div>{{ 'League.title' | translate }}</div>
-        </md-list-item>
+        </mat-list-item>
       </a>
-      <md-list-item class="app-container__sidenav-list__item">
-        <md-icon>group</md-icon>
+      <mat-list-item class="app-container__sidenav-list__item">
+        <mat-icon>group</mat-icon>
         <div> ??? </div>
-      </md-list-item>
-    </md-list>
-  </md-sidenav>
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
 
   <div class="header">
     <div class="header__left">
       <div>
-        <md-icon (click)="sidenav.open()">menu</md-icon>
+        <mat-icon (click)="sidenav.open()">menu</mat-icon>
       </div>
       <div class="header__title">
       FootBall League
@@ -38,4 +38,4 @@
 
   <router-outlet></router-outlet>
 
-</md-sidenav-container>
+</mat-sidenav-container>

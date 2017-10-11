@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { DialogComponent } from './dialog.component';
 
 @Injectable()
 export class DialogService {
 
-  constructor(private dialog: MdDialog) { }
+  constructor(private dialog: MatDialog) { }
 
   openDialog(title, content, buttonAccept, buttonReject, acceptFunc?, rejectFunc = () => {}) {
     this.dialog.open(DialogComponent, {

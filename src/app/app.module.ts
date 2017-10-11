@@ -10,22 +10,23 @@ import { LoaderService } from './common/loader/loader.service';
 import { LoaderComponent } from './common/loader/loader.component';
 import { FormsModule } from '@angular/forms';
 import {
-  MdButtonModule,
-  MdCheckboxModule,
+  MatButtonModule,
+  MatCheckboxModule,
   MatDatepickerModule,
-  MdNativeDateModule,
-  MdIconModule,
-  MdIconRegistry,
-  MdSidenavModule,
-  MdListModule,
-  MdTableModule,
-  MdSortModule,
-  MdInputModule,
+  MatNativeDateModule,
+  MatIconModule,
+  MatIconRegistry,
+  MatSidenavModule,
+  MatListModule,
+  MatTableModule,
+  MatSortModule,
+  MatInputModule,
   MatTabsModule,
   MatSelectModule,
   MatProgressSpinnerModule,
   MatProgressBarModule,
-  MatDialogModule
+  MatDialogModule,
+  MatGridListModule
 } from '@angular/material';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './homepage/homepage';
@@ -70,26 +71,27 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     BrowserModule,
     BrowserAnimationsModule,
-    MdButtonModule,
-    MdCheckboxModule,
+    MatButtonModule,
+    MatCheckboxModule,
     MatDatepickerModule,
-    MdNativeDateModule,
-    MdIconModule,
-    MdSidenavModule,
-    MdListModule,
-    MdTableModule,
-    MdSortModule,
-    MdInputModule,
+    MatNativeDateModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    MatTableModule,
+    MatSortModule,
+    MatInputModule,
     MatTabsModule,
     MatSelectModule,
     FormsModule,
     HttpModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatGridListModule
   ],
   exports: [LoaderComponent, DialogComponent],
-  providers: [MdIconRegistry, LoaderService, DialogService],
+  providers: [MatIconRegistry, LoaderService, DialogService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
