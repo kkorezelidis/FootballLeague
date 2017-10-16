@@ -13,3 +13,10 @@ body {
 html {
   height: 100%;
 }
+
+mat-cell {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}

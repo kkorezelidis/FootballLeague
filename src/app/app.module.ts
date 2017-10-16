@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { LoaderService } from './common/loader/loader.service';
 import { LoaderComponent } from './common/loader/loader.component';
+import { TableComponent } from './common/table/table.component';
 import { FormsModule } from '@angular/forms';
 import {
   MatButtonModule,
@@ -51,6 +52,7 @@ export function createTranslateLoader(http: HttpClient) {
     LeagueComponent,
     HomePageComponent,
     LoaderComponent,
+    TableComponent,
     DialogComponent
   ],
   entryComponents: [
@@ -90,7 +92,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatDialogModule,
     MatGridListModule
   ],
-  exports: [LoaderComponent, DialogComponent],
+  exports: [LoaderComponent, DialogComponent, TableComponent],
   providers: [MatIconRegistry, LoaderService, DialogService],
   bootstrap: [AppComponent]
 })
