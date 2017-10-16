@@ -43,11 +43,28 @@ export class LeaguedService {
       });
   }
 
-  getRankings(leagueId): Observable<Ranking[]> {
+  getRankings(leagueId): Observable<[any]> {
     this.showLoader();
 
     return this.http
       .get(environment.baseUrl + AppSettings.API_ENDPOINTS.rankings + leagueId, this.options)
+      .map((res: Response) => res.json())
+      .catch((error: any) => {
+        // this.dialogService.openDialog('Title', 'message', 'button1', 'button2', () => {
+        //   console.log('test');
+        // });
+        return Observable.throw(error.json().error || 'Server error');
+      })
+      .finally(() => {
+        this.hideLoader();
+      });
+  }
+
+  getEvents(leagueId): Observable<[any]> {
+    this.showLoader();
+
+    return this.http
+      .get(environment.baseUrl + AppSettings.API_ENDPOINTS.events + leagueId, this.options)
       .map((res: Response) => res.json())
       .catch((error: any) => {
         // this.dialogService.openDialog('Title', 'message', 'button1', 'button2', () => {

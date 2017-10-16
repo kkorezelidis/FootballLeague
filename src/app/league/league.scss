@@ -1,17 +1,11 @@
 .league {
-  display: flex;
-  flex-direction: column;
-  min-width: 300px;
-
-  .league__selectLeague{
-    margin: 20px;
+  .mat-select-trigger{
+    padding: 120px !important;
   }
 
-  .league__table {
-    overflow: scroll;
+  .mat-select {
+    padding: 30px;
+    width: auto;
   }
 
-  .league__table-cell {
-    color: black;
-  }
 }

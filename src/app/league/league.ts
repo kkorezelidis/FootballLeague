@@ -1,8 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { DataSource } from '@angular/cdk/collections';
-import { MatSort } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
+import { Component, OnInit } from '@angular/core';
 import { LeaguedService } from './league.service';
+import { map, transform } from 'lodash';
 
 @Component({
   selector: 'app-league',
@@ -13,16 +11,20 @@ import { LeaguedService } from './league.service';
 export class LeagueComponent implements OnInit {
   constructor(private leagueService: LeaguedService) {}
 
-  displayedColumns = ['teamName', 'points'];
-  dataSource: ExampleDataSource | null;
   leagues: Array<any>;
+  rankingCols: Array<string>;
+  eventCols: Array<string>;
+  rankingColNames: Array<string>;
+  eventColNames: Array<string>;
   selectedLeague: number;
-  matches: any;
-
-  @ViewChild(MatSort) sort: MatSort;
+  rankingData: Array<object>;
+  eventData: Array<object>;
 
   ngOnInit() {
-    this.matches = ['ολυ', 'παν', 'αεκ', 'paok'];
+    this.rankingCols = ['teamName', 'points', 'matchesPlayed', 'wins', 'draws', 'loss', 'goalsFor', 'goalsAgainst'];
+    this.eventCols = ['homeTeam', 'awayTeam', 'score'];
+    this.rankingColNames = ['Ομάδα', 'Πόντοι', 'Παιχνίδια', 'Νίκες', 'Ισσοπαλίες', 'Ήτες', 'Γκολ (Ε)', 'Γκόλ (Δ)'];
+    this.eventColNames = ['Γηπεδούχος', 'Φιλοξενούμενος', 'Σκορ'];
     this.leagueService.getLeagues().subscribe(leagues => {
       this.leagues = leagues;
       this.selectedLeague = leagues[0].id;
@@ -30,8 +32,6 @@ export class LeagueComponent implements OnInit {
     }, (error) => {
       console.log('er', error);
     });
-    this.sort.active = 'points';
-    this.sort.direction = 'desc';
   }
 
   onChange() {
@@ -39,52 +39,19 @@ export class LeagueComponent implements OnInit {
   }
 
   private getRanking() {
-    this.leagueService.getRankings(this.selectedLeague).subscribe(ranking => {
-      this.dataSource = new ExampleDataSource(ranking, this.sort);
+    this.leagueService.getRankings(this.selectedLeague).subscribe((ranking) => {
+      this.rankingData = ranking;
     });
-  }
-}
+    this.leagueService.getEvents(this.selectedLeague).subscribe((events) => {
+      map(events, (event) => {
+        event['awayTeam'] = event['awayTeam']['name'];
+        event['homeTeam'] = event['homeTeam']['name'];
+        event['score'] = (event['homeGoals'] !== undefined) ? `${event['homeGoals']}-${event['awayGoals']}` : 'Αναμένεται';
+      });
 
-export class ExampleDataSource extends DataSource<any> {
-  constructor(private _data: Array<any>, private _sort: MatSort) {
-    super();
-  }
-
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<Array<any>> {
-    const displayDataChanges = [this._data, this._sort.sortChange];
-
-    return Observable.merge(...displayDataChanges).map(() => {
-      return this.getSortedData();
+      this.eventData = events;
     });
-  }
-
-  disconnect() {}
-
-  /** Returns a sorted copy of the database data. */
-  getSortedData(): Array<any> {
-    if (!this._sort.active || !this._sort.direction) {
-      return this._data;
-    }
-
-    return this._data.sort((a, b) => {
-      let propertyA: number | string = '';
-      let propertyB: number | string = '';
-      switch (this._sort.active) {
-        case 'teamName':
-          [propertyA, propertyB] = [a.teamName, b.teamName];
-          break;
-        case 'points':
-          [propertyA, propertyB] = [a.points, b.points];
-          break;
-      }
-
-      let valueA = isNaN(+propertyA) ? propertyA : +propertyA;
-      let valueB = isNaN(+propertyB) ? propertyB : +propertyB;
-
-      return (
-        (valueA < valueB ? -1 : 1) * (this._sort.direction == 'asc' ? 1 : -1)
-      );
-    });
+    // this.leagueService.getRankings.
+    // console.log('this.rankingData', );
   }
 }
