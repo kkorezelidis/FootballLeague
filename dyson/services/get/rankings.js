@@ -9,7 +9,7 @@ var leagues = {
       rankings.push({
         teamId: g.random.number({'max': 20}),
         teamName: g.name.firstName,
-        matchesPlayed: g.random.number({'max': 20}),
+        matchesPlayed: g.random.number({'max': 5}),
         points: g.random.number({'max': 50}),
         wins: g.random.number({'max': 5}),
         draws: g.random.number({'max': 5}),
