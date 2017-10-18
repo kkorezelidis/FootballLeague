@@ -26,8 +26,8 @@ export class LeagueComponent implements OnInit {
 
     const screenWidth = window.innerWidth;
 
-    if (screenWidth < 480){
-      this.rankingColNames = ['Ο', 'Α', 'Β', 'Ν', 'Ι', 'Ή', 'ΓΥ', 'ΓΚ'];
+    if (screenWidth < 480) {
+      this.rankingColNames = ['Ο', 'Α', 'Β', 'Ν', 'Ι', 'Η', 'ΓΥ', 'ΓΚ'];
     }else {
       this.rankingColNames = ['Ομάδα', 'Αγώνες', 'Βαθμοί', 'Νίκες', 'Ισοπαλίες', 'Ήττες', 'Γκολ Υπέρ', 'Γκόλ Κατά'];
     }
