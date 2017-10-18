@@ -1,11 +1,21 @@
+.league-container {
+  position: fixed;
+  z-index: 100;
+}
+
 .league {
   .mat-select-trigger{
     padding: 120px !important;
   }
 
   .mat-select {
-    padding: 30px;
+    padding: 20px;
     width: auto;
   }
 
+  .league__tabs {
+    position: relative;
+    top: 136px;
+  }
 }
+

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
-@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
-@import "~flag-icon-css/css/flag-icon.min.css";
+@import '~@angular/material/prebuilt-themes/purple-green.css';
+//@import "~flag-icon-css/css/flag-icon.min.css";
 
 /* You can add global styles to this file, and also import other style files */
 body {
@@ -19,4 +19,17 @@ mat-cell {
   white-space: nowrap;
   overflow: hidden !important;
   text-overflow: ellipsis;
+  text-align: center;
+}
+
+.mat-sort-header-button{
+  margin: auto;
+}
+
+.mat-sort-header-arrow{
+  margin: 0px !important;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

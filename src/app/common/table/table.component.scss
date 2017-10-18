@@ -1,7 +1,43 @@
 .league__table {
-  overflow: scroll;
+  overflow: auto  ;
 }
 
 .league__table-cell {
   color: black;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.table-header {
+  min-height: 64px;
+  //display: flex;
+  align-items: baseline;
+  padding: 8px 24px 0;
+  font-size: 20px;
+  justify-content: space-between;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  flex-grow: 1;
+  margin-left: 32px;
+}
+
+@media only screen and (max-width: 480px){
+  .mat-form-field {
+    font-size: 12px;
+  }
+
+  .mat-header-cell, .mat-cell{
+    text-align: center;
+    font-size: 11px;
+  }
+
+  .mat-header-row, .mat-row{
+    padding: 0 10px;
+  }
 }

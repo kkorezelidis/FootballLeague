@@ -1,6 +1,7 @@
-import {Component, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import {MatSort, SortDirection} from '@angular/material';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 
 @Component({
@@ -14,16 +15,18 @@ export class TableComponent implements OnInit, OnChanges {
   @Input() data: Array<object>;
   @Input() sortColumn: string;
   @Input() sortDirection?: SortDirection;
+  @Input() hasFiltering: string;
   dataSource: ExampleDataSource | null;
 
   constructor() {}
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('filter') filter: ElementRef;
+
 
   ngOnChanges(changes: any): void {
     if (changes.data.currentValue) {
-      console.log('changes.data.currentValue', changes.data.currentValue);
-      this.dataSource = new ExampleDataSource(changes.data.currentValue, this.sort);
+      this.dataSource = new ExampleDataSource(changes.data.currentValue, this.sort, this.hasFiltering !== 'false');
     }
   }
 
@@ -31,24 +34,51 @@ export class TableComponent implements OnInit, OnChanges {
     this.dataSource = null;
     this.sort.active = this.sortColumn;
     this.sort.direction = this.sortDirection;
+
+    if (this.hasFiltering !== 'false') {
+      Observable.fromEvent(this.filter.nativeElement, 'keyup')
+        .debounceTime(150)
+        .distinctUntilChanged()
+        .subscribe(() => {
+          if (!this.dataSource) { return; }
+          this.dataSource.filter = this.filter.nativeElement.value;
+        });
+    }
   }
 }
 
 export class ExampleDataSource extends DataSource<any> {
-  constructor(private _data: Array<any>, private _sort: MatSort) {
+  _filterChange = new BehaviorSubject('');
+  get filter(): string { return this._filterChange.value; }
+  set filter(filter: string) { this._filterChange.next(filter); }
+
+  constructor(private _data: Array<any>, private _sort: MatSort, private _hasFiltering: boolean) {
     super();
   }
 
   /** Connect function called by the table to retrieve one stream containing the data to render. */
   connect(): Observable<Array<any>> {
-    const displayDataChanges = [this._data, this._sort.sortChange];
+    const displayDataChanges = [this._data, this._sort.sortChange, this._filterChange];
 
     return Observable.merge(...displayDataChanges).map(() => {
-      return this.getSortedData();
+      if (this._hasFiltering) {
+        return this.getFilteredData(this.getSortedData());
+      }else {
+        return this.getSortedData();
+      }
     });
   }
 
   disconnect() {}
+
+  getFilteredData(data): Array<any> {
+    this._data = data;
+    return this._data.slice().filter((item) => {
+      let searchHomeTeam = item.homeTeam.toLowerCase();
+      let searchAwayTeam = item.awayTeam.toLowerCase();
+      return searchHomeTeam.indexOf(this.filter.toLowerCase()) != -1 || searchAwayTeam.indexOf(this.filter.toLowerCase()) != -1;
+    });
+  }
 
   /** Returns a sorted copy of the database data. */
   getSortedData(): Array<any> {

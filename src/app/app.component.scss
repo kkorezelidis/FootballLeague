@@ -1,4 +1,8 @@
 .header {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -38,6 +42,11 @@
   }
 }
 
+.app-body{
+  position: relative;
+  top: 65px;
+}
+
 .app-container {
   width: 100%;
   height: 100%;
@@ -62,7 +71,6 @@
       .app-container__sidenav-list__item{
         cursor: pointer;
         font-size: 14px;
-        text-transform: uppercase;
 
         mat-icon {
           margin-right: 10px;

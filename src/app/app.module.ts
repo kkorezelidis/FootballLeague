@@ -27,7 +27,9 @@ import {
   MatProgressSpinnerModule,
   MatProgressBarModule,
   MatDialogModule,
-  MatGridListModule
+  MatGridListModule,
+  MatFormFieldModule,
+  MatCardModule
 } from '@angular/material';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './homepage/homepage';
@@ -90,7 +92,9 @@ export function createTranslateLoader(http: HttpClient) {
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatDialogModule,
-    MatGridListModule
+    MatGridListModule,
+    MatFormFieldModule,
+    MatCardModule
   ],
   exports: [LoaderComponent, DialogComponent, TableComponent],
   providers: [MatIconRegistry, LoaderService, DialogService],

@@ -14,10 +14,6 @@
           <div>{{ 'League.title' | translate }}</div>
         </mat-list-item>
       </a>
-      <mat-list-item class="app-container__sidenav-list__item">
-        <mat-icon>group</mat-icon>
-        <div> ??? </div>
-      </mat-list-item>
     </mat-list>
   </mat-sidenav>
 
@@ -27,15 +23,16 @@
         <mat-icon (click)="sidenav.open()">menu</mat-icon>
       </div>
       <div class="header__title">
-      FootBall League
-    </div>
+        DA LUZ
+      </div>
     </div>
     <div class="header__right">
-
-      <span class="header__right-flag flag-icon" [ngClass]="flag" (click)="toggleLanguage()"> </span>
+      <span class="header__right-flag flag-icon" [ngClass]="flag" (click)="toggleLanguage()" *ngIf="false"> </span>
     </div>
   </div>
 
-  <router-outlet></router-outlet>
+  <div class="app-body">
+    <router-outlet></router-outlet>
+  </div>
 
 </mat-sidenav-container>

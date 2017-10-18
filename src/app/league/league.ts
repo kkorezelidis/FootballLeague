@@ -21,9 +21,16 @@ export class LeagueComponent implements OnInit {
   eventData: Array<object>;
 
   ngOnInit() {
-    this.rankingCols = ['teamName', 'points', 'matchesPlayed', 'wins', 'draws', 'loss', 'goalsFor', 'goalsAgainst'];
+    this.rankingCols = ['teamName', 'matchesPlayed', 'points', 'wins', 'draws', 'loss', 'goalsFor', 'goalsAgainst'];
     this.eventCols = ['homeTeam', 'awayTeam', 'score'];
-    this.rankingColNames = ['Ομάδα', 'Πόντοι', 'Παιχνίδια', 'Νίκες', 'Ισσοπαλίες', 'Ήτες', 'Γκολ (Ε)', 'Γκόλ (Δ)'];
+
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth < 480){
+      this.rankingColNames = ['Ο', 'Α', 'Β', 'Ν', 'Ι', 'Ή', 'ΓΥ', 'ΓΚ'];
+    }else {
+      this.rankingColNames = ['Ομάδα', 'Αγώνες', 'Βαθμοί', 'Νίκες', 'Ισοπαλίες', 'Ήττες', 'Γκολ Υπέρ', 'Γκόλ Κατά'];
+    }
     this.eventColNames = ['Γηπεδούχος', 'Φιλοξενούμενος', 'Σκορ'];
     this.leagueService.getLeagues().subscribe(leagues => {
       this.leagues = leagues;
@@ -51,7 +58,5 @@ export class LeagueComponent implements OnInit {
 
       this.eventData = events;
     });
-    // this.leagueService.getRankings.
-    // console.log('this.rankingData', );
   }
 }

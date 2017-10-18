@@ -1,16 +1,22 @@
 <div class="league example-container mat-elevation-z8">
-  <!--[(ngModel)]="selectedLeague" (change)="onChange()"-->
-  <mat-select class="league__selectLeague" placeholder="Επιλογή πρωταθλήματος" [(ngModel)]="selectedLeague" (change)="onChange()">
-    <mat-option *ngFor="let league of leagues" [value]="league.id">
-      {{ league.name }}
-    </mat-option>
-  </mat-select>
-  <mat-tab-group>
+  <div class="league-container">
+    <mat-card>
+      <mat-card-subtitle>Επιλογή πρωταθλήματος</mat-card-subtitle>
+      <mat-card-content>
+        <mat-select class="league__selectLeague" placeholder="Επιλογή πρωταθλήματος" [(ngModel)]="selectedLeague" (change)="onChange()">
+          <mat-option *ngFor="let league of leagues" [value]="league.id">
+            {{ league.name }}
+          </mat-option>
+        </mat-select>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <mat-tab-group class="league__tabs">
     <mat-tab label="Βαθμολογία">
-      <app-table [displayedColumns]="rankingCols" [columnNames]="rankingColNames" [data]="rankingData" [sortColumn]="rankingCols[1]" sortDirection="desc"></app-table>
+      <app-table [displayedColumns]="rankingCols" [columnNames]="rankingColNames" [data]="rankingData" [sortColumn]="rankingCols[1]" sortDirection="desc" hasFiltering="false"></app-table>
     </mat-tab>
-    <mat-tab label="Πρωτάθλημα">
-      <app-table [displayedColumns]="eventCols" [columnNames]="eventColNames" [data]="eventData" [sortColumn]="eventCols[0]"></app-table>
+    <mat-tab label="Αποτελέσματα">
+      <app-table [displayedColumns]="eventCols" [columnNames]="eventColNames" [data]="eventData" [sortColumn]="eventCols[0]" hasFiltering="true"></app-table>
     </mat-tab>
   </mat-tab-group>
 </div>
